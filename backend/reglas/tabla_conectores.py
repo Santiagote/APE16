@@ -1,0 +1,12 @@
+COORDINADAS = {
+    "y": "Copulativa", "e": "Copulativa", "ni": "Copulativa",
+    "o": "Disyuntiva", "u": "Disyuntiva",
+    "pero": "Adversativa", "sin embargo": "Adversativa",
+}
+
+SUBORDINADAS = {
+    "porque": "Causal", "ya que": "Causal", "puesto que": "Causal",
+    "si": "Condicional", "aunque": "Concesiva",
+    "mientras": "Temporal", "cuando": "Temporal",
+    "para que": "Final", "por lo tanto": "Consecutiva",
+}
