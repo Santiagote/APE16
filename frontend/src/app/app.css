@@ -1,0 +1,364 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f7fa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #1a1a2e;
+  margin: 0 0 0.25rem;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.input-section {
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #6366f1;
+}
+
+.input-group button {
+  padding: 0.75rem 1.5rem;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.input-group button:hover:not(:disabled) {
+  background: #4f46e5;
+}
+
+.input-group button:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.ejemplos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.ejemplos-label {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-right: 0.25rem;
+}
+
+.pill {
+  padding: 0.3rem 0.7rem;
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pill:hover {
+  background: #c7d2fe;
+}
+
+.error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.clasificacion {
+  margin-bottom: 1.5rem;
+}
+
+.clasificacion h2 {
+  font-size: 1.25rem;
+  color: #1a1a2e;
+  margin: 0 0 0.75rem;
+}
+
+.clasificacion-cards {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card-tipo {
+  border-left: 4px solid #6366f1;
+}
+
+.card-relacion {
+  border-left: 4px solid #10b981;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.roles-gramaticales h3 {
+  font-size: 1rem;
+  color: #374151;
+  margin: 0.5rem 0 0.5rem;
+}
+
+.roles-grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.rol {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.rol-label {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rol-value {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.accordion-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  background: #fff;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-align: left;
+}
+
+.accordion-header:hover {
+  background: #f9fafb;
+}
+
+.accordion-header.active {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.accordion-icon {
+  font-size: 0.7rem;
+  width: 1rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.accordion-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9ca3af;
+  background: #f3f4f6;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.accordion-body {
+  padding: 0 1.25rem 1rem;
+  animation: slideDown 0.15s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tabla-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  background: #f9fafb;
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.idx {
+  color: #9ca3af;
+  width: 40px;
+}
+
+.token {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.pos-tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.pos-noun { background: #dbeafe; color: #1e40af; }
+.pos-verb { background: #fce7f3; color: #be185d; }
+.pos-adj { background: #d1fae5; color: #065f46; }
+.pos-adv { background: #fef3c7; color: #92400e; }
+.pos-det { background: #e5e7eb; color: #374151; }
+.pos-adp { background: #ede9fe; color: #5b21b6; }
+.pos-conj { background: #fce7f3; color: #9d174d; }
+.pos-pron { background: #ccfbf1; color: #0f766e; }
+.pos-punct { background: #f3f4f6; color: #9ca3af; }
+.pos-num { background: #fef9c3; color: #854d0e; }
+
+.dep-tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.arbol-container {
+  padding: 1rem 1.5rem;
+  overflow-x: auto;
+}
+
+.arbol-visual {
+  font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.arbol-nodo {
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+}
+
+.arbol-linea {
+  color: #c7d2fe;
+  font-weight: 400;
+}
+
+.arbol-label {
+  color: #6366f1;
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+.arbol-token {
+  color: #1a1a2e;
+  font-weight: 700;
+  background: #f0fdf4;
+  padding: 0 0.3rem;
+  border-radius: 3px;
+  border: 1px solid #bbf7d0;
+}

@@ -1,0 +1,160 @@
+<div class="container">
+  <header>
+    <h1>Analizador de Oraciones</h1>
+    <p class="subtitle">Análisis Léxico, Sintáctico y Clasificación Semántica — Stanford CoreNLP</p>
+  </header>
+
+  <section class="input-section">
+    <div class="input-group">
+      <input
+        type="text"
+        [ngModel]="oracion()"
+        (ngModelChange)="oracion.set($event)"
+        (keyup.enter)="analizar()"
+        placeholder="Escribe una oración en español..."
+      />
+      <button (click)="analizar()" [disabled]="cargando()">
+        {{ cargando() ? 'Analizando...' : 'Analizar' }}
+      </button>
+    </div>
+
+    <div class="ejemplos">
+      <span class="ejemplos-label">Ejemplos:</span>
+      @for (ej of oracionesEjemplo; track ej) {
+        <button class="pill" (click)="seleccionarEjemplo(ej)">{{ ej }}</button>
+      }
+    </div>
+  </section>
+
+  @if (error()) {
+    <div class="error">{{ error() }}</div>
+  }
+
+  @if (resultado(); as res) {
+    <section class="clasificacion">
+      <h2>Clasificación</h2>
+      <div class="clasificacion-cards">
+        <div class="card card-tipo">
+          <span class="card-label">Tipo de oración</span>
+          <span class="card-value">{{ res.tipo || 'N/A' }}</span>
+        </div>
+        @if (res.relacion_semantica) {
+          <div class="card card-relacion">
+            <span class="card-label">Relación semántica</span>
+            <span class="card-value">{{ res.relacion_semantica }}</span>
+          </div>
+        }
+      </div>
+
+      @if (res.tipo === 'Simple') {
+        <div class="roles-gramaticales">
+          <h3>Roles gramaticales</h3>
+          <div class="roles-grid">
+            @if (res.sujeto) {
+              <div class="rol"><span class="rol-label">Sujeto</span><span class="rol-value">{{ res.sujeto }}</span></div>
+            }
+            @if (res.verbo_principal) {
+              <div class="rol"><span class="rol-label">Verbo principal</span><span class="rol-value">{{ res.verbo_principal }}</span></div>
+            }
+            @if (res.objeto_directo) {
+              <div class="rol"><span class="rol-label">Objeto directo</span><span class="rol-value">{{ res.objeto_directo }}</span></div>
+            }
+          </div>
+        </div>
+      }
+    </section>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" (click)="toggle('tokens')" [class.active]="seccionAbierta() === 'tokens'">
+          <span class="accordion-icon">{{ seccionAbierta() === 'tokens' ? '▼' : '▶' }}</span>
+          Tokens (Léxico)
+          <span class="accordion-count">{{ res.tokens.length }}</span>
+        </button>
+        @if (seccionAbierta() === 'tokens') {
+          <div class="accordion-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Token</th>
+                  <th>Lema</th>
+                  <th>POS</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (token of res.tokens; track $index) {
+                  <tr>
+                    <td class="idx">{{ $index + 1 }}</td>
+                    <td class="token-cell">{{ token.palabra }}</td>
+                    <td>{{ token.lema }}</td>
+                    <td><span class="pos-tag" [class]="clasePos(token.pos)">{{ token.pos }}</span></td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" (click)="toggle('dependencias')" [class.active]="seccionAbierta() === 'dependencias'">
+          <span class="accordion-icon">{{ seccionAbierta() === 'dependencias' ? '▼' : '▶' }}</span>
+          Dependencias (Sintaxis)
+          <span class="accordion-count">{{ res.dependencias.length }}</span>
+        </button>
+        @if (seccionAbierta() === 'dependencias') {
+          <div class="accordion-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Gobernador</th>
+                  <th>Dependiente</th>
+                  <th>Relación</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (dep of res.dependencias; track $index) {
+                  <tr>
+                    <td class="idx">{{ $index + 1 }}</td>
+                    <td>{{ dep.gobernador }}</td>
+                    <td>{{ dep.dependiente }}</td>
+                    <td><span class="dep-tag">{{ dep.relacion }}</span></td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+
+      @if (res.arbol_sintactico) {
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggle('arbol')" [class.active]="seccionAbierta() === 'arbol'">
+            <span class="accordion-icon">{{ seccionAbierta() === 'arbol' ? '▼' : '▶' }}</span>
+            Árbol Sintáctico (Constituency)
+          </button>
+          @if (seccionAbierta() === 'arbol') {
+            <div class="accordion-body">
+              <div class="arbol-visual">
+                @for (nodo of arbolPlano(res.arbol_sintactico); track $index) {
+                  <div class="arbol-nodo" [style.paddingLeft]="(nodo.depth * 24) + 'px'">
+                    @if (nodo.depth > 0) {
+                      <span class="arbol-linea">{{ nodo.esUltimo ? '└── ' : '├── ' }}</span>
+                    }
+                    @if (nodo.esRama) {
+                      <span class="arbol-label">{{ nodo.label }}</span>
+                    } @else {
+                      <span class="arbol-token">{{ nodo.label }}</span>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>
