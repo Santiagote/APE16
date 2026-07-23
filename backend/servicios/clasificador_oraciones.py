@@ -17,6 +17,15 @@ class ClasificadorOraciones:
         fachada = self._fachadas.get(motor, self._fachadas["stanza"])
         resultado = fachada.analizar(oracion)
 
+        for d in resultado.dependencias:
+            rel = d.relacion.lower()
+            if rel == "root":
+                resultado.verbo_principal = d.dependiente
+            elif rel in ("nsubj", "nsubj:pass"):
+                resultado.sujeto = d.dependiente
+            elif rel in ("obj", "dobj"):
+                resultado.objeto_directo = d.dependiente
+
         for estrategia in self._estrategias:
             clasificacion = estrategia.clasificar(resultado)
             if clasificacion:
@@ -24,11 +33,4 @@ class ClasificadorOraciones:
                 return resultado
 
         resultado.tipo = TipoOracion.SIMPLE
-        for d in resultado.dependencias:
-            if d.relacion == "root":
-                resultado.verbo_principal = d.dependiente
-            elif d.relacion == "nsubj":
-                resultado.sujeto = d.dependiente
-            elif d.relacion == "obj":
-                resultado.objeto_directo = d.dependiente
         return resultado
