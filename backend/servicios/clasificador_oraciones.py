@@ -4,19 +4,17 @@ from nlp.fachada_spacy import FachadaSpacy
 from reglas.estrategia_coordinada import EstrategiaCoordinada
 from reglas.estrategia_subordinada import EstrategiaSubordinada
 
-_FACHADAS = {
-    "stanza": FachadaStanza,
-    "spacy": FachadaSpacy,
-}
-
 
 class ClasificadorOraciones:
     def __init__(self):
+        self._fachadas = {
+            "stanza": FachadaStanza(),
+            "spacy": FachadaSpacy(),
+        }
         self._estrategias = [EstrategiaCoordinada(), EstrategiaSubordinada()]
 
     def analizar_y_clasificar(self, oracion: str, motor: str = "stanza") -> ResultadoAnalisis:
-        cls = _FACHADAS.get(motor, FachadaStanza)
-        fachada = cls()
+        fachada = self._fachadas.get(motor, self._fachadas["stanza"])
         resultado = fachada.analizar(oracion)
 
         for estrategia in self._estrategias:
