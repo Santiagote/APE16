@@ -8,7 +8,8 @@ servicio = ClasificadorOraciones()
 @controlador_analisis.route("/api/analizar", methods=["POST"])
 def analizar():
     data = request.get_json()
-    resultado = servicio.analizar_y_clasificar(data["oracion"])
+    motor = data.get("motor", "stanza")
+    resultado = servicio.analizar_y_clasificar(data["oracion"], motor=motor)
     payload = asdict(resultado)
     payload["tipo"] = resultado.tipo.value if resultado.tipo else None
     return jsonify(payload)

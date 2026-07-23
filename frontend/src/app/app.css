@@ -37,6 +37,22 @@ h1 {
   gap: 0.5rem;
 }
 
+.motor-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.motor-select:focus {
+  border-color: #6366f1;
+}
+
 .input-group input {
   flex: 1;
   padding: 0.75rem 1rem;

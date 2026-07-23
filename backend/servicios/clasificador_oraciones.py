@@ -1,15 +1,23 @@
 from dominio.modelos_oracion import ResultadoAnalisis, TipoOracion
 from nlp.fachada_stanza import FachadaStanza
+from nlp.fachada_spacy import FachadaSpacy
 from reglas.estrategia_coordinada import EstrategiaCoordinada
 from reglas.estrategia_subordinada import EstrategiaSubordinada
 
+_FACHADAS = {
+    "stanza": FachadaStanza,
+    "spacy": FachadaSpacy,
+}
+
+
 class ClasificadorOraciones:
     def __init__(self):
-        self._fachada = FachadaStanza()
         self._estrategias = [EstrategiaCoordinada(), EstrategiaSubordinada()]
 
-    def analizar_y_clasificar(self, oracion: str) -> ResultadoAnalisis:
-        resultado = self._fachada.analizar(oracion)
+    def analizar_y_clasificar(self, oracion: str, motor: str = "stanza") -> ResultadoAnalisis:
+        cls = _FACHADAS.get(motor, FachadaStanza)
+        fachada = cls()
+        resultado = fachada.analizar(oracion)
 
         for estrategia in self._estrategias:
             clasificacion = estrategia.clasificar(resultado)

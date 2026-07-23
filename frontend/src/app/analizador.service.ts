@@ -32,7 +32,7 @@ export class AnalizadorService {
 
   constructor(private http: HttpClient) {}
 
-  analizar(oracion: string): Observable<ResultadoAnalisis> {
-    return this.http.post<ResultadoAnalisis>(this.apiUrl, { oracion });
+  analizar(oracion: string, motor: string = 'stanza'): Observable<ResultadoAnalisis> {
+    return this.http.post<ResultadoAnalisis>(this.apiUrl, { oracion, motor });
   }
 }

@@ -10,6 +10,7 @@ import { AnalizadorService, ResultadoAnalisis } from './analizador.service';
 })
 export class App {
   oracion = signal('');
+  motor = signal('stanza');
   resultado = signal<ResultadoAnalisis | null>(null);
   cargando = signal(false);
   error = signal('');
@@ -36,7 +37,7 @@ export class App {
     this.error.set('');
     this.resultado.set(null);
 
-    this.analizador.analizar(texto).subscribe({
+    this.analizador.analizar(texto, this.motor()).subscribe({
       next: (res) => {
         this.resultado.set(res);
         this.cargando.set(false);
